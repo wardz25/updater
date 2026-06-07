@@ -1159,7 +1159,3 @@ function VoidUI:modePickerRow(parent, config)
 end
 
 return VoidUI
-
-
-
-
