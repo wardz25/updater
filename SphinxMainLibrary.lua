@@ -1,22 +1,22 @@
-local SphinxUI = {}
-SphinxUI.__index = SphinxUI
+local VoidUI = {}
+VoidUI.__index = VoidUI
 
 local TweenSvc = game:GetService("TweenService")
 local UIS = game:GetService("UserInputService")
 
-function SphinxUI.new(theme)
-	local self = setmetatable({}, SphinxUI)
+function VoidUI.new(theme)
+	local self = setmetatable({}, VoidUI)
 	self.T = theme
 	return self
 end
 
-function SphinxUI:corner(parent, radius)
+function VoidUI:corner(parent, radius)
 	local c = Instance.new("UICorner", parent)
 	c.CornerRadius = UDim.new(0, radius or 6)
 	return c
 end
 
-function SphinxUI:stroke(parent, col, th)
+function VoidUI:stroke(parent, col, th)
 	local s = Instance.new("UIStroke", parent)
 	s.Color = col or self.T.STROKE
 	s.Thickness = th or 1
@@ -24,7 +24,7 @@ function SphinxUI:stroke(parent, col, th)
 	return s
 end
 
-function SphinxUI:frame(parent, size, pos, bg, tr)
+function VoidUI:frame(parent, size, pos, bg, tr)
 	local f = Instance.new("Frame")
 	f.Size = size or UDim2.new(1, 0, 1, 0)
 	f.Position = pos or UDim2.new(0, 0, 0, 0)
@@ -35,7 +35,7 @@ function SphinxUI:frame(parent, size, pos, bg, tr)
 	return f
 end
 
-function SphinxUI:label(parent, text, size, pos, col, fs, xa)
+function VoidUI:label(parent, text, size, pos, col, fs, xa)
 	local l = Instance.new("TextLabel")
 	l.Size = size or UDim2.new(1, 0, 0, 16)
 	l.Position = pos or UDim2.new(0, 0, 0, 0)
@@ -50,7 +50,7 @@ function SphinxUI:label(parent, text, size, pos, col, fs, xa)
 	return l
 end
 
-function SphinxUI:button(parent, text, size, pos, bg, tc, fs)
+function VoidUI:button(parent, text, size, pos, bg, tc, fs)
 	local b = Instance.new("TextButton")
 	b.Size = size or UDim2.new(0, 80, 0, 26)
 	b.Position = pos or UDim2.new(0, 0, 0, 0)
@@ -67,7 +67,7 @@ function SphinxUI:button(parent, text, size, pos, bg, tc, fs)
 	return b
 end
 
-function SphinxUI:input(parent, default, ph, size, pos)
+function VoidUI:input(parent, default, ph, size, pos)
 	local b = Instance.new("TextBox")
 	b.Size = size or UDim2.new(0, 80, 0, 22)
 	b.Position = pos or UDim2.new(0, 0, 0, 0)
@@ -86,7 +86,7 @@ function SphinxUI:input(parent, default, ph, size, pos)
 	return b
 end
 
-function SphinxUI:scroll(parent, size, pos)
+function VoidUI:scroll(parent, size, pos)
 	local sf = Instance.new("ScrollingFrame")
 	sf.Size = size or UDim2.new(1, 0, 1, 0)
 	sf.Position = pos or UDim2.new(0, 0, 0, 0)
@@ -100,14 +100,14 @@ function SphinxUI:scroll(parent, size, pos)
 	return sf
 end
 
-function SphinxUI:list(parent, pad)
+function VoidUI:list(parent, pad)
 	local l = Instance.new("UIListLayout", parent)
 	l.Padding = UDim.new(0, pad or 4)
 	l.SortOrder = Enum.SortOrder.LayoutOrder
 	return l
 end
 
-function SphinxUI:pad(parent, t, l, r, b_)
+function VoidUI:pad(parent, t, l, r, b_)
 	local p = Instance.new("UIPadding", parent)
 	p.PaddingTop = UDim.new(0, t or 0)
 	p.PaddingLeft = UDim.new(0, l or 0)
@@ -116,13 +116,13 @@ function SphinxUI:pad(parent, t, l, r, b_)
 	return p
 end
 
-function SphinxUI:divider(parent, lo)
+function VoidUI:divider(parent, lo)
 	local d = self:frame(parent, UDim2.new(1, 0, 0, 1), nil, Color3.fromRGB(28, 28, 28))
 	d.LayoutOrder = lo
 	return d
 end
 
-function SphinxUI:toggle(parent, pos, initState, onChange)
+function VoidUI:toggle(parent, pos, initState, onChange)
 	local T = self.T
 	local box = self:frame(parent, UDim2.new(0, 44, 0, 22), pos, T.TOGGLE_OFF)
 	self:corner(box, 11)
@@ -144,7 +144,7 @@ function SphinxUI:toggle(parent, pos, initState, onChange)
 end
 
 -- FIXED: Simple left/right cycle picker — no floating dropdown, no scroll-overlap bug
-function SphinxUI:inlinePicker(parent, options, currentVal, onSelect, size, pos)
+function VoidUI:inlinePicker(parent, options, currentVal, onSelect, size, pos)
 	local T = self.T
 	local container = self:frame(parent, size or UDim2.new(1, 0, 0, 28), pos, T.BTN)
 	self:corner(container, 5)
@@ -199,7 +199,7 @@ function SphinxUI:inlinePicker(parent, options, currentVal, onSelect, size, pos)
 	}
 end
 
-function SphinxUI:accordion(parent, title, lo, startOpen)
+function VoidUI:accordion(parent, title, lo, startOpen)
 	local T = self.T
 	local header = self:frame(parent, UDim2.new(1, 0, 0, 32), nil, Color3.fromRGB(3, 3, 3))
 	header.LayoutOrder = lo
@@ -232,7 +232,7 @@ end
 
 
 
-function SphinxUI:inlinePickerDropdown(rowParent, overlayParent, config)
+function VoidUI:inlinePickerDropdown(rowParent, overlayParent, config)
 	local zIdx = config.zIndex or 70
 	local strokeCol = config.strokeColor or self.T.ACCENT
 	local multi = config.multiSelect or false
@@ -413,7 +413,7 @@ function SphinxUI:inlinePickerDropdown(rowParent, overlayParent, config)
 	}
 end
 
-function SphinxUI:accordionScroll(parent, title, lo, startOpen, config)
+function VoidUI:accordionScroll(parent, title, lo, startOpen, config)
 	local cfg = config or {}
 	local T = self.T
 	local header = self:frame(parent, UDim2.new(1,0,0,32), nil, Color3.fromRGB(3,3,3))
@@ -452,7 +452,7 @@ end
 
 
 
-function SphinxUI:updateRowVisual(row, isSel, selBG, selTxt, defaultBG, defaultTxt, accentStroke, dimStroke)
+function VoidUI:updateRowVisual(row, isSel, selBG, selTxt, defaultBG, defaultTxt, accentStroke, dimStroke)
     row.BackgroundColor3 = isSel and selBG or defaultBG
     row.TextColor3 = isSel and selTxt or defaultTxt
     local s = row:FindFirstChildOfClass("UIStroke")
@@ -460,7 +460,7 @@ function SphinxUI:updateRowVisual(row, isSel, selBG, selTxt, defaultBG, defaultT
 end
 
 
-function SphinxUI:updateRowVisualWithSub(row, isSel, selBG, selTxt, defaultBG, defaultTxt, accentStroke, dimStroke, subSelColor, subDefaultColor)
+function VoidUI:updateRowVisualWithSub(row, isSel, selBG, selTxt, defaultBG, defaultTxt, accentStroke, dimStroke, subSelColor, subDefaultColor)
     row.BackgroundColor3 = isSel and selBG or defaultBG
     row.TextColor3 = isSel and selTxt or defaultTxt
     local s = row:FindFirstChildOfClass("UIStroke")
@@ -471,7 +471,7 @@ end
 
 
 
-function SphinxUI.fmtTime(secs)
+function VoidUI.fmtTime(secs)
     secs = math.floor(secs)
     local h = math.floor(secs/3600)
     local m = math.floor((secs%3600)/60)
@@ -483,7 +483,7 @@ end
 
 
 
-function SphinxUI:sidebar(parent)
+function VoidUI:sidebar(parent)
 	local scroll = Instance.new("ScrollingFrame", parent)
 	scroll.Size = UDim2.new(1,0,1,0)
 	scroll.BackgroundTransparency = 1
@@ -510,7 +510,7 @@ function SphinxUI:sidebar(parent)
 	return list
 end
 
-function SphinxUI:iconBtn(parent, icon, label)
+function VoidUI:iconBtn(parent, icon, label)
 	local T = self.T
 	local b = Instance.new("TextButton", parent)
 	b.Size = UDim2.new(1,-8,0,38)
@@ -584,7 +584,7 @@ function SphinxUI:iconBtn(parent, icon, label)
 	return { Button=b, SetActive=setActive }
 end
 
-function SphinxUI:sidebarDivider(parent)
+function VoidUI:sidebarDivider(parent)
 	local d = Instance.new("Frame", parent)
 	d.Size = UDim2.new(0,30,0,1)
 	d.BackgroundColor3 = Color3.fromRGB(28,28,40)
@@ -592,7 +592,7 @@ function SphinxUI:sidebarDivider(parent)
 	return d
 end
 
-function SphinxUI:labelWrap(parent, text, size, pos, col, fs, xa)
+function VoidUI:labelWrap(parent, text, size, pos, col, fs, xa)
 	local l = Instance.new("TextLabel")
 	l.Size = size or UDim2.new(1, 0, 0, 0)
 	l.Position = pos or UDim2.new(0, 0, 0, 0)
@@ -609,7 +609,7 @@ function SphinxUI:labelWrap(parent, text, size, pos, col, fs, xa)
 	return l
 end
 
-function SphinxUI:teamCard(parent, teamName, petNames, count, lo, onSwap, onDelete)
+function VoidUI:teamCard(parent, teamName, petNames, count, lo, onSwap, onDelete)
 	local T = self.T
 	local PETS_PER_ROW = 3
 	local rows = math.ceil(#petNames / PETS_PER_ROW)
@@ -654,7 +654,7 @@ function SphinxUI:teamCard(parent, teamName, petNames, count, lo, onSwap, onDele
 end
 
 
-function SphinxUI:builtinTeamCard(parent, name, desc, lo, onEquip)
+function VoidUI:builtinTeamCard(parent, name, desc, lo, onEquip)
 	local T = self.T
 	local card = self:frame(parent, UDim2.new(1, 0, 0, 52), nil, Color3.fromRGB(8, 8, 22))
 	card.LayoutOrder = lo
@@ -671,7 +671,7 @@ function SphinxUI:builtinTeamCard(parent, name, desc, lo, onEquip)
 	badgeIcon.Size = UDim2.new(0, 10, 0, 10)
 	badgeIcon.Position = UDim2.new(0, 2, 0.5, -5)
 	badgeIcon.BackgroundTransparency = 1
-	badgeIcon.Image = "rbxthumb://type=Asset&id=5669312251&w=150&h=150"
+	badgeIcon.Image = "rbxthumb://type=Asset&id=123412828199958&w=150&h=150"
 	badgeIcon.ScaleType = Enum.ScaleType.Fit
 	local badgeLbl = self:label(badge, "BUILT-IN", UDim2.new(1, -14, 1, 0), UDim2.new(0, 13, 0, 0), Color3.fromRGB(160, 130, 255), 7, Enum.TextXAlignment.Center)
 	badgeLbl.Font = Enum.Font.GothamBold
@@ -687,7 +687,7 @@ function SphinxUI:builtinTeamCard(parent, name, desc, lo, onEquip)
 	sphinxLogo.Size = UDim2.new(0, 32, 0, 32)
 	sphinxLogo.Position = UDim2.new(1, -68, 0.5, -16)
 	sphinxLogo.BackgroundTransparency = 1
-	sphinxLogo.Image = "rbxthumb://type=Asset&id=5669312251&w=150&h=150"
+	sphinxLogo.Image = "rbxthumb://type=Asset&id=123412828199958&w=150&h=150"
 	sphinxLogo.ScaleType = Enum.ScaleType.Fit
 	sphinxLogo.ImageTransparency = 0.2
 
@@ -697,7 +697,7 @@ function SphinxUI:builtinTeamCard(parent, name, desc, lo, onEquip)
 	equipBtn.MouseButton1Click:Connect(function() if onEquip then onEquip() end end)
 	return card
 end
-function SphinxUI:teamCard(parent, name, petNames, count, lo, onEquip, onDelete)
+function VoidUI:teamCard(parent, name, petNames, count, lo, onEquip, onDelete)
 	local T = self.T
 	local mutCount = {}
 	for _, pt in ipairs(petNames) do
@@ -789,7 +789,7 @@ end
 
 
 
-function SphinxUI:timingEditor(acInner, pageFrame, CFG, D, saveD)
+function VoidUI:timingEditor(acInner, pageFrame, CFG, D, saveD)
 	local T = self.T
 
 	local defaults = {
@@ -963,7 +963,7 @@ function SphinxUI:timingEditor(acInner, pageFrame, CFG, D, saveD)
 end
 
 
-function SphinxUI:logPanel(parent, lo, maxLines)
+function VoidUI:logPanel(parent, lo, maxLines)
 	local T = self.T
 	maxLines = maxLines or 45
 	local panel = self:frame(parent, UDim2.new(1,0,0,64), nil, T.PANEL)
@@ -998,7 +998,7 @@ function SphinxUI:logPanel(parent, lo, maxLines)
 end
 
 
-function SphinxUI:boostStatusRow(parent, lo)
+function VoidUI:boostStatusRow(parent, lo)
 	local T = self.T
 	local row = self:frame(parent, UDim2.new(1,0,0,24), nil, T.PANEL)
 	row.LayoutOrder = lo
@@ -1012,7 +1012,7 @@ function SphinxUI:boostStatusRow(parent, lo)
 end
 
 
-function SphinxUI:modePickerRow(parent, config)
+function VoidUI:modePickerRow(parent, config)
 
 	local T = self.T
 	local modes     = config.modes or {}
@@ -1158,7 +1158,7 @@ function SphinxUI:modePickerRow(parent, config)
 	}
 end
 
-return SphinxUI
+return VoidUI
 
 
 

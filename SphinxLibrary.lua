@@ -1488,12 +1488,12 @@ end
 
 function SphinxUI:loadingScreen(config)
     config = config or {}
-    local title     = config.title     or "H Y D R A"
+    local title     = config.title     or "S P H I N X"
     local accentCol = config.accentCol or Color3.fromRGB(200, 10, 10)
     local glowCol   = config.glowCol   or Color3.fromRGB(120, 0, 0)
     local bgCol     = config.bgCol     or Color3.fromRGB(7, 6, 10)
     local tags      = config.tags      or {"AUTO BUY", "AUTO SELL", "SNIPE"}
-    local logoId    = config.logoId    or "rbxassetid://5669312242"
+    local logoId    = config.logoId    or "rbxassetid://123412828199958"
     local statuses  = config.statuses  or {
         {text="INITIALIZING...",       pct=0.15},
         {text="LOADING MODULES...",    pct=0.40},
